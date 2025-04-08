@@ -1,9 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 {
+    public InputAction MoveAction;
+    
     public float turnSpeed = 20f;
 
     Animator m_Animator;
@@ -17,12 +20,16 @@ public class PlayerMovement : MonoBehaviour
         m_Animator = GetComponent<Animator> ();
         m_Rigidbody = GetComponent<Rigidbody> ();
         m_AudioSource = GetComponent<AudioSource> ();
+        
+        MoveAction.Enable();
     }
 
     void FixedUpdate ()
     {
-        float horizontal = Input.GetAxis ("Horizontal");
-        float vertical = Input.GetAxis ("Vertical");
+        var pos = MoveAction.ReadValue<Vector2>();
+        
+        float horizontal = pos.x;
+        float vertical = pos.y;
         
         m_Movement.Set(horizontal, 0f, vertical);
         m_Movement.Normalize ();
