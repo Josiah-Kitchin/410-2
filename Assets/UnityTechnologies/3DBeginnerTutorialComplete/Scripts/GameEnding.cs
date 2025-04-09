@@ -10,6 +10,8 @@ public class GameEnding : MonoBehaviour
     public AudioSource exitAudio;
     public CanvasGroup caughtBackgroundImageCanvasGroup;
     public AudioSource caughtAudio;
+    public GameObject hitEffectPrefab; //Particle effect
+
 
     bool m_IsPlayerAtExit;
     bool m_IsPlayerCaught;
@@ -37,6 +39,9 @@ public class GameEnding : MonoBehaviour
         }
         else if (m_IsPlayerCaught)
         {
+            // Spawn particle effect at contact point
+            Instantiate(hitEffectPrefab, transform.position, Quaternion.identity);
+
             EndLevel (caughtBackgroundImageCanvasGroup, true, caughtAudio);
         }
     }
