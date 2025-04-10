@@ -2,8 +2,7 @@ Group Members:
 Josiah, Miro, Hai, Axel
 
 Dot Product (Hai)
-I created an arrow that changes color depending on if the player is facing the direction of the exit or not. It changes to red if they are facing the opposite direction, 
-meaning that the dot product was less than or equal to 0. It turns green if the player is facing the exit, meaning that the dot product is greater than 0.
+I created an arrow that changes color depending on if the player is facing the direction of the exit or not. It changes to red if they are facing the opposite direction, meaning that the dot product was less than or equal to 0. It turns green if the player is facing the exit, meaning that the dot product is greater than 0.
 
 Linear Interpolation (Josiah)
 
