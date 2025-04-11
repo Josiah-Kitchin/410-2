@@ -3,12 +3,17 @@ using UnityEngine;
 public class CollisionEffect : MonoBehaviour
 {
     public GameObject player;
-    public GameObject alertEffectPrefab;
-    public float detectionRange = 5f;
+    public ParticleSystem alertEffectPrefab;
+    public float detectionRange = 20f;
 
     private bool hasTriggered = false;
 
-    void DetectPlayer(GameObject player)
+    void Start()
+    {
+        player = GameObject.Find("JohnLemon");
+    }
+
+    void DetectPlayer()
     {
         // Avoid spawning the effect multiple times
         if (hasTriggered) return;
@@ -17,24 +22,25 @@ public class CollisionEffect : MonoBehaviour
 
         // Example trigger when player is found
         Vector3 spawnPosition = transform.position + new Vector3(0, 1.5f, 0); // slightly above enemy
-        Instantiate(alertEffectPrefab, spawnPosition, Quaternion.identity);
+        Instantiate(alertEffectPrefab, spawnPosition, Quaternion.identity, this.transform);
+        alertEffectPrefab.Play();
         
         Debug.Log("Player found! Alert effect triggered!");
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            DetectPlayer(other.gameObject);
-        }
-    }
+    // void OnTriggerEnter2D(Collider2D other)
+    // {
+    //     if (other.CompareTag("Player"))
+    //     {
+    //         DetectPlayer();
+    //     }
+    // }
 
     void Update()
     {
         if (!hasTriggered && Vector2.Distance(player.transform.position, transform.position) < detectionRange)
         {
-            DetectPlayer(player.gameObject);
+            DetectPlayer();
         }
     }
 }
